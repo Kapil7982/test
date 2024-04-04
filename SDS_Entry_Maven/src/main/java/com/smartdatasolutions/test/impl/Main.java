@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 public class Main extends MemberFileConverter {
 
@@ -51,6 +53,19 @@ public class Main extends MemberFileConverter {
         }
         return membersByState;
 	}
+	
+	
+    protected void writeMembers(File outputFile, MemberExporter exporter, List<Member> members) throws IOException {
+        Set<String> uniqueIds = new HashSet<>();
+        Writer writer = new FileWriter(outputFile);
+        for (Member member : members) {
+            if (!uniqueIds.contains(member.getId())) {
+                exporter.writeMember(member, writer);
+                uniqueIds.add(member.getId());
+            }
+        }
+        writer.close();
+    }
 
 	public static void main( String[] args ) {
 		
