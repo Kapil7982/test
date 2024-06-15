@@ -7,7 +7,7 @@ import java.security.Key;
 
 public class KeyGenerator {
     public static void main(String[] args) {
-        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // or HS384 or HS512
+        Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256); 
         String base64Key = Encoders.BASE64.encode(key.getEncoded());
         System.out.println(base64Key);
     }
